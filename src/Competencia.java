@@ -105,4 +105,32 @@ public class Competencia {
             System.out.println(pronosticadores.get(i).get_nombre() + ": " + pronosticadores.get(i).puntaje);
         }
     }
+
+    //Post: Agregará el partido a la ronda correspondiente, si no existe la ronda, la crea
+    public void agregar_partido(Partido partido){
+        int id_ronda = partido.get_id_ronda();
+
+        if(obtener_ronda(id_ronda) == null){
+            Ronda nueva_ronda = new Ronda(id_ronda);
+            nueva_ronda.agregar_partido(partido);
+            agregar_ronda(nueva_ronda);
+        } else {
+            //! ACA NO SE SABE SI FUNCIONA.
+            //! SI NO FUNCIONA, ES PORQUE EL METODO "OBTENER_RONDA" DEVUELVE UNA COPIA DE LA RONDA, NO UNA REFERENCIA.
+            obtener_ronda(id_ronda).agregar_partido(partido);
+        }
+    }
+
+    //Post: Agregará el pronóstico al pronosticador correspondiente, si no existe el pronosticador, lo crea
+    public void agregar_pronostico(Pronostico pronostico, String nombre_pronosticador){
+        if(obtener_pronosticador(nombre_pronosticador) == null){
+            Pronosticador nuevo_pronosticador = new Pronosticador(nombre_pronosticador);
+            nuevo_pronosticador.agregar_pronostico(pronostico);
+            agregar_pronosticador(nuevo_pronosticador);
+        } else {
+            //! ACA NO SE SABE SI FUNCIONA.
+            //! SI NO FUNCIONA, ES PORQUE EL METODO "OBTENER_PRONOSTICADOR" DEVUELVE UNA COPIA DEL PRONOSTICADOR, NO UNA REFERENCIA.
+            obtener_pronosticador(nombre_pronosticador).agregar_pronostico(pronostico);
+        }
+    }
 }
