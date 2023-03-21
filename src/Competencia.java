@@ -79,7 +79,7 @@ public class Competencia {
         return pronosticador_buscado;
     }
 
-    //Post: Calcula la cantidad de puntos de cada pronosticador
+    //Post: Calcula la cantidad de puntos de cada pronosticador.
     private void calcular_puntos() {
         Pronosticador pronosticador_actual;
 
@@ -88,7 +88,7 @@ public class Competencia {
 
             for (int j = 0; j < pronosticador_actual.obtener_pronosticos().size(); j++) {
                 Pronostico pronostico_actual = pronosticador_actual.obtener_pronosticos().get(j);
-                Partido partido_pronosticado = rondas.get(pronostico_actual.get_id_ronda()).obtener_partido(pronostico_actual.get_id_partido());
+                Partido partido_pronosticado = this.obtener_ronda(pronostico_actual.get_id_ronda()).obtener_partido(pronostico_actual.get_id_partido());
 
                 if(partido_pronosticado != null && pronostico_actual.get_pronostico() == partido_pronosticado.get_resultado_partido()) {
                     pronosticadores.get(i).set_puntaje(pronosticador_actual.puntaje + BONUS_ACIERTO);
