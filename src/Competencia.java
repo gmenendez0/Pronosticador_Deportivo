@@ -79,6 +79,11 @@ public class Competencia {
         return pronosticador_buscado;
     }
 
+    //Post: Devuelve true si el pronóstico coincide con el resultado del partido, false en caso contrario o en caso de que el partido pronosticado no exista.
+    private boolean pronostico_acertado(Partido partido_pronosticado, Pronostico pronostico_actual){
+        return ((partido_pronosticado != null) && (pronostico_actual.get_pronostico() == partido_pronosticado.get_resultado_partido()));
+    }
+
     //Post: Calcula la cantidad de puntos de cada pronosticador.
     private void calcular_puntos() {
         Pronosticador pronosticador_actual;
@@ -90,7 +95,7 @@ public class Competencia {
                 Pronostico pronostico_actual = pronosticador_actual.obtener_pronosticos().get(j);
                 Partido partido_pronosticado = this.obtener_ronda(pronostico_actual.get_id_ronda()).obtener_partido(pronostico_actual.get_id_partido());
 
-                if(partido_pronosticado != null && pronostico_actual.get_pronostico() == partido_pronosticado.get_resultado_partido()) {
+                if(pronostico_acertado(partido_pronosticado, pronostico_actual)){
                     pronosticadores.get(i).set_puntaje(pronosticador_actual.puntaje + BONUS_ACIERTO);
                 }
             }
@@ -115,8 +120,6 @@ public class Competencia {
             nueva_ronda.agregar_partido(partido);
             agregar_ronda(nueva_ronda);
         } else {
-            //! ACA NO SE SABE SI FUNCIONA.
-            //! SI NO FUNCIONA, ES PORQUE EL METODO "OBTENER_RONDA" DEVUELVE UNA COPIA DE LA RONDA, NO UNA REFERENCIA.
             obtener_ronda(id_ronda).agregar_partido(partido);
         }
     }
@@ -128,8 +131,6 @@ public class Competencia {
             nuevo_pronosticador.agregar_pronostico(pronostico);
             agregar_pronosticador(nuevo_pronosticador);
         } else {
-            //! ACA NO SE SABE SI FUNCIONA.
-            //! SI NO FUNCIONA, ES PORQUE EL METODO "OBTENER_PRONOSTICADOR" DEVUELVE UNA COPIA DEL PRONOSTICADOR, NO UNA REFERENCIA.
             obtener_pronosticador(nombre_pronosticador).agregar_pronostico(pronostico);
         }
     }
