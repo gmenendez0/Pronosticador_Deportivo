@@ -26,7 +26,7 @@ public class Competencia {
     }
 
     //Post: Devuelve la ronda buscada o null en caso de no encontrarla
-    public Ronda obtener_ronda(int numero_ronda) {
+    private Ronda obtener_ronda(int numero_ronda) {
         Ronda ronda_buscada = null;
         int iterador = 0;
         boolean encontrado = false;
@@ -44,7 +44,7 @@ public class Competencia {
     }
 
     //Post: Devuelve el equipo buscado o null en caso de no encontrarlo
-    public Equipo obtener_equipo(String nombre_equipo_buscado) {
+    private Equipo obtener_equipo(String nombre_equipo_buscado) {
         Equipo equipo_buscado = null;
         int iterador = 0;
         boolean encontrado = false;
@@ -62,7 +62,7 @@ public class Competencia {
     }
 
     //Post: Devuelve el pronosticador buscado o null en caso de no encontrarlo
-    public Pronosticador obtener_pronosticador(String nombre_pronosticador_buscado) {
+    private Pronosticador obtener_pronosticador(String nombre_pronosticador_buscado) {
         Pronosticador pronosticador_buscado = null;
         int iterador = 0;
         boolean encontrado = false;
