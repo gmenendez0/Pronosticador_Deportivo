@@ -1,5 +1,5 @@
 public class Equipo {
-    private String ID_equipo;
+    private final String ID_equipo;
 
     //Post: Crea un equipo con el ID especificado
     public Equipo(String ID_equipo){

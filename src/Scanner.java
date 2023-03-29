@@ -16,8 +16,8 @@ public class Scanner {
     static final String SEPARADOR = ";";
     static final String INDICADOR = "X";
 
-    private Path partidos_path;
-    private Path pronosticos_path;
+    private final Path partidos_path;
+    private final Path pronosticos_path;
 
     //Post: Crea un objeto scanner
     public Scanner(Path partidos_path, Path pronosticos_path) {

@@ -1,7 +1,7 @@
 public class Pronostico {
-    private int ID_partido;
-    private int ID_ronda;
-    private int pronostico; //0: empate, 1: equipo1, 2: equipo2
+    private final int ID_partido;
+    private final int ID_ronda;
+    private final int pronostico; //0: empate, 1: equipo1, 2: equipo2
 
     //Post: Crea un pronostico con los datos recibidos
     Pronostico(int ID_partido, int ID_ronda, int pronostico){

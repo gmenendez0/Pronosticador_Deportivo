@@ -3,12 +3,12 @@ public class Partido {
     final int GANA_EQUIPO1 = 1;
     final int GANA_EQUIPO2 = 2;
 
-    private int ID_Partido;
-    private int ID_ronda;
-    private String ID_equipo1;
-    private String ID_equipo2;
-    private int goles_equipo1;
-    private int goles_equipo2;
+    private final int ID_Partido;
+    private final int ID_ronda;
+    private final String ID_equipo1;
+    private final String ID_equipo2;
+    private final int goles_equipo1;
+    private final int goles_equipo2;
     private int resultado; //0: empate, 1: equipo1, 2: equipo2
 
     //Post: Crea un partido con los datos recibidos.
