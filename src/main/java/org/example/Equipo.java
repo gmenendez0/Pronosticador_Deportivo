@@ -1,3 +1,5 @@
+package org.example;
+
 public class Equipo {
     private final String ID_equipo;
 

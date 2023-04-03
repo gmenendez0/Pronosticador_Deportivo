@@ -1,3 +1,5 @@
+package org.example;
+
 public class Partido {
     final int EMPATE = 0;
     final int GANA_EQUIPO1 = 1;

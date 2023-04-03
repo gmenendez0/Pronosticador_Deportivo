@@ -1,3 +1,5 @@
+package org.example;
+
 public class Pronostico {
     private final int ID_partido;
     private final int ID_ronda;
