@@ -98,7 +98,8 @@ public class Competencia {
                 Partido partido_pronosticado = this.obtener_ronda(pronostico_actual.get_id_ronda()).obtener_partido(pronostico_actual.get_id_partido());
 
                 if(pronostico_acertado(partido_pronosticado, pronostico_actual)){
-                    pronosticadores.get(i).set_puntaje(pronosticador_actual.puntaje + BONUS_ACIERTO);
+                    pronosticadores.get(i).set_puntaje(pronosticador_actual.get_puntaje() + BONUS_ACIERTO);
+                    pronosticadores.get(i).aumentar_aciertos();
                 }
             }
         }
@@ -109,7 +110,7 @@ public class Competencia {
         calcular_puntos();
 
         for (int i = 0; i < pronosticadores.size(); i++) {
-            System.out.println(pronosticadores.get(i).get_nombre() + ": " + pronosticadores.get(i).puntaje);
+            System.out.println(pronosticadores.get(i).get_nombre() + ": Puntos: " + pronosticadores.get(i).get_puntaje() + " Aciertos: " + pronosticadores.get(i).get_cantidad_de_aciertos());
         }
     }
 
