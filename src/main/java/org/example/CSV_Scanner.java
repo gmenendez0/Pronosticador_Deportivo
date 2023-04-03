@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class Scanner {
+public class CSV_Scanner {
     static final int PRIMERA_POSICION = 0;
     static final int SEGUNDA_POSICION = 1;
     static final int TERCERA_POSICION = 2;
@@ -22,7 +22,7 @@ public class Scanner {
     private final Path pronosticos_path;
 
     //Post: Crea un objeto scanner
-    public Scanner(Path partidos_path, Path pronosticos_path) {
+    public CSV_Scanner(Path partidos_path, Path pronosticos_path) {
         this.partidos_path = partidos_path;
         this.pronosticos_path = pronosticos_path;
     }

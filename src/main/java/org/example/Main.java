@@ -14,10 +14,10 @@ public class Main {
         Path pronosticos_path = Paths.get("src/main/resources/pronosticos.csv");
         if(!Files.exists(pronosticos_path)) Files.createFile(pronosticos_path);
 
-        Scanner scanner = new Scanner(partidos_path, pronosticos_path);
+        CSV_Scanner CSV_Scanner = new CSV_Scanner(partidos_path, pronosticos_path);
 
-        scanner.cargar_partidos(competencia);
-        scanner.cargar_pronosticos(competencia);
+        CSV_Scanner.cargar_partidos(competencia);
+        CSV_Scanner.cargar_pronosticos(competencia);
 
         competencia.mostrar_puntajes();
     }
