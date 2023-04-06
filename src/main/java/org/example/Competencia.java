@@ -3,14 +3,15 @@ package org.example;
 import java.util.ArrayList;
 
 public class Competencia {
-    final int BONUS_ACIERTO = 1;
-
     private ArrayList<Ronda> rondas = new ArrayList<Ronda>();
     private ArrayList<Equipo> equipos = new ArrayList<Equipo>();
     private ArrayList<Pronosticador> pronosticadores = new ArrayList<Pronosticador>();
+    private final int puntos_por_acierto;
 
     //Post: Crea una competencia
-    public Competencia() {}
+    public Competencia(int puntos_por_acierto) {
+        this.puntos_por_acierto = puntos_por_acierto;
+    }
 
     //Post: Agrega una ronda a la competencia
     public void agregar_ronda(Ronda ronda) {
@@ -98,7 +99,7 @@ public class Competencia {
                 Partido partido_pronosticado = this.obtener_ronda(pronostico_actual.get_id_ronda()).obtener_partido(pronostico_actual.get_id_partido());
 
                 if(pronostico_acertado(partido_pronosticado, pronostico_actual)){
-                    pronosticadores.get(i).set_puntaje(pronosticador_actual.get_puntaje() + BONUS_ACIERTO);
+                    pronosticadores.get(i).set_puntaje(pronosticador_actual.get_puntaje() + puntos_por_acierto);
                     pronosticadores.get(i).aumentar_aciertos();
                 }
             }
