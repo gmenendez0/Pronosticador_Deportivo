@@ -1,4 +1,4 @@
-package org.example;
+package org.pronosticador;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;

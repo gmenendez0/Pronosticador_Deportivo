@@ -1,4 +1,4 @@
-package org.example;
+package org.pronosticador;
 
 public class Equipo {
     private final String ID_equipo;

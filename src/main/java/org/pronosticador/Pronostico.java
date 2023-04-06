@@ -1,4 +1,4 @@
-package org.example;
+package org.pronosticador;
 
 public class Pronostico {
     private final int ID_partido;

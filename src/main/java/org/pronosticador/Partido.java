@@ -1,4 +1,4 @@
-package org.example;
+package org.pronosticador;
 
 public class Partido {
     final int EMPATE = 0;
