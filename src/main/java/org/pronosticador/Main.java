@@ -9,16 +9,21 @@ public class Main {
         var inputs_usuario = new InputsUsuario();
         Competencia competencia = new Competencia(inputs_usuario.preguntar_puntos_por_acierto());
 
-        Path partidos_path = Paths.get("src/main/resources/partidos.csv");
+        /*Path partidos_path = Paths.get("src/main/resources/partidos.csv");
         if(!Files.exists(partidos_path)) Files.createFile(partidos_path);
 
         Path pronosticos_path = Paths.get("src/main/resources/pronosticos.csv");
-        if(!Files.exists(pronosticos_path)) Files.createFile(pronosticos_path);
+        if(!Files.exists(pronosticos_path)) Files.createFile(pronosticos_path);*/
 
-        CSV_Scanner CSV_Scanner = new CSV_Scanner(partidos_path, pronosticos_path);
 
-        CSV_Scanner.cargar_partidos(competencia);
-        CSV_Scanner.cargar_pronosticos(competencia);
+        DatabaseConnector databaseConnector = new DatabaseConnector();
+
+        //DatabaseConnector.crearBaseDeDatos();
+        //DatabaseConnector.llenarBaseDeDatos();
+
+        databaseConnector.cargarPartidos(competencia);
+        databaseConnector.cargarPronosticos(competencia);
+        databaseConnector.mostrarPartidos();
 
         competencia.mostrar_puntajes();
     }
