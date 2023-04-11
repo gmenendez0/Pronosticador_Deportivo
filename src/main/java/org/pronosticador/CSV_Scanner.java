@@ -27,7 +27,7 @@ public class CSV_Scanner {
         this.pronosticos_path = pronosticos_path;
     }
 
-    //Pre; El path "partidos_path" debe estar inicialiado.
+    //Pre: El path "partidos_path" debe estar inicialiado.
     //Post: Lee el csv del path "partidos_path" y carga lo leido en la competencia.
     public void cargar_partidos(Competencia competencia) throws IOException {
         BufferedReader lector = Files.newBufferedReader(this.partidos_path);
@@ -43,7 +43,7 @@ public class CSV_Scanner {
         }
     }
 
-    //Pre; El path "pronosticos_path" debe estar inicialiado.
+    //Pre: El path "pronosticos_path" debe estar inicialiado.
     //Post: Lee el csv del path "pronosticos_path" y carga lo leido en la competencia.
     public void cargar_pronosticos(Competencia competencia) throws IOException {
         BufferedReader lector = Files.newBufferedReader(this.pronosticos_path);
@@ -56,8 +56,8 @@ public class CSV_Scanner {
             caracteristicas_pronostico = linea_leida.split(SEPARADOR);
             pronostico_realizado = determinar_pronostico_realizado(caracteristicas_pronostico);
 
-            pronostico_leido = new Pronostico(Integer.parseInt(caracteristicas_pronostico[1]), Integer.parseInt(caracteristicas_pronostico[2]), pronostico_realizado);
-            competencia.agregar_pronostico(pronostico_leido, caracteristicas_pronostico[0]);
+            pronostico_leido = new Pronostico(Integer.parseInt(caracteristicas_pronostico[SEGUNDA_POSICION]), Integer.parseInt(caracteristicas_pronostico[TERCERA_POSICION]), pronostico_realizado);
+            competencia.agregar_pronostico(pronostico_leido, caracteristicas_pronostico[PRIMERA_POSICION]);
         }
     }
 
