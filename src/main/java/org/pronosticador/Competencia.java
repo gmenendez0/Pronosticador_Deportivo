@@ -3,6 +3,9 @@ package org.pronosticador;
 import java.util.ArrayList;
 
 public class Competencia {
+    final int PUNTOS_POR_RONDA_ACERTADA = 5;
+
+
     private ArrayList<Ronda> rondas = new ArrayList<Ronda>();
     private ArrayList<Equipo> equipos = new ArrayList<Equipo>();
     private ArrayList<Pronosticador> pronosticadores = new ArrayList<Pronosticador>();
@@ -87,12 +90,13 @@ public class Competencia {
         return ((partido_pronosticado != null) && (pronostico_actual.get_pronostico() == partido_pronosticado.get_resultado_partido()));
     }
 
-    //Post: Calcula la cantidad de puntos de cada pronosticador.
-    private void calcular_puntos() {
+    //Post: Actualiza la cantidad de puntos de cada pronosticador por pronosticos acertados.
+    private void calcular_puntos_por_aciertos() {
         Pronosticador pronosticador_actual;
 
         for (int i = 0; i < pronosticadores.size(); i++) {
             pronosticador_actual = pronosticadores.get(i);
+            pronosticador_actual.inicializar_aciertos_por_ronda(rondas);
 
             for (int j = 0; j < pronosticador_actual.obtener_pronosticos().size(); j++) {
                 Pronostico pronostico_actual = pronosticador_actual.obtener_pronosticos().get(j);
@@ -101,6 +105,18 @@ public class Competencia {
                 if(pronostico_acertado(partido_pronosticado, pronostico_actual)){
                     pronosticadores.get(i).set_puntaje(pronosticador_actual.get_puntaje() + puntos_por_acierto);
                     pronosticadores.get(i).aumentar_aciertos();
+                    pronosticadores.get(i).aumentar_aciertos_de_ronda(pronostico_actual.get_id_ronda());
+                }
+            }
+        }
+    }
+
+    //Post: Actualiza la cantidad de puntos de cada pronosticador por rondas completas acertadas.
+    private void calcular_puntos_por_rondas() {
+        for (int i = 0; i < pronosticadores.size(); i++) {
+            for (int j = 0; j < rondas.size(); j++) {
+                if (pronosticadores.get(i).get_aciertos_de_ronda(rondas.get(j).get_id_ronda()) == rondas.get(j).get_cantidad_de_partidos()) {
+                    pronosticadores.get(i).set_puntaje(pronosticadores.get(i).get_puntaje() + PUNTOS_POR_RONDA_ACERTADA);
                 }
             }
         }
@@ -108,7 +124,8 @@ public class Competencia {
 
     //Post: Imprime en pantalla los puntajes de todos los pronosticadores
     public void mostrar_puntajes() {
-        calcular_puntos();
+        calcular_puntos_por_aciertos();
+        calcular_puntos_por_rondas();
 
         for (int i = 0; i < pronosticadores.size(); i++) {
             System.out.println(pronosticadores.get(i).get_nombre() + ": Puntos: " + pronosticadores.get(i).get_puntaje() + " Aciertos: " + pronosticadores.get(i).get_cantidad_de_aciertos());

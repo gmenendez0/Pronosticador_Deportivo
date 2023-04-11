@@ -38,4 +38,9 @@ public class Ronda {
     public int get_id_ronda() {
         return ID_ronda;
     }
+
+    //Post: Devuelve la cantidad de partidos que tiene la ronda
+    public int get_cantidad_de_partidos() {
+        return partidos.size();
+    }
 }
