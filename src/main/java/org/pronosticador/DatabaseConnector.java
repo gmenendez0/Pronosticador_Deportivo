@@ -1,5 +1,9 @@
 package org.pronosticador;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.*;
+import java.util.Properties;
 
 public class DatabaseConnector {
     static final int PRIMERA_POSICION = 1;
@@ -12,53 +16,43 @@ public class DatabaseConnector {
 
     static final int PRIMER_INDEX = 0;
     static final int SEGUNDO_INDEX = 1;
+    static final int TERCER_INDEX = 2;
+
     static final int GANA_EQUIPO1 = 1;
     static final int GANA_EQUIPO2 = 2;
     static final int EMPATE = 0;
     static final String INDICADOR = "X";
 
-    static final String urlDB = "jdbc:mysql://sql10.freemysqlhosting.net:3306/sql10612648";
-    static final String CONTRASENIA = "Y4dezdRJMd"; //TODO COLOCAR CONTRASEÑA
-    static final String USUARIO = "sql10612648";
+    static final String CONFIG_FILE_PATH = "src/main/resources/config.properties";
 
-    public void crearBaseDeDatos() throws SQLException {
+    //Post: Lee las credenciales de la base de datos del archivo .properties y las devuelve en un array de strings.
+    private String[] recuperarCredencialesBaseDeDatos() throws FileNotFoundException {
+        Properties propiedades = new Properties();
+        String[] credencialesBaseDeDatos = {"","",""};
+
         try {
-            Connection con = DriverManager.getConnection(urlDB, USUARIO, CONTRASENIA);
-            Statement stmt = con.createStatement();
+            FileInputStream configFile = new FileInputStream(CONFIG_FILE_PATH);
+            propiedades.load(configFile);
 
-            stmt.execute("CREATE TABLE Pronosticos(" +
-                    " ID_PRONOSTICO int primary key NOT NULL AUTO_INCREMENT," +
-                    " PARTICIPANTE Varchar(255) NOT NULL," +
-                    " ID_PARTIDO int NOT NULL," +
-                    " ID_RONDA INT NOT NULL," +
-                    " EQUIPO1 Varchar(255) NOT NULL," +
-                    " GANA1 Varchar(1)," +
-                    " EMPATA Varchar(1)," +
-                    " GANA2 Varchar(1)," +
-                    " EQUIPO2 Varchar(255) NOT NULL" +
-                    ");");
-
-            stmt.execute("CREATE TABLE Partidos(" +
-                    " ID_PARTIDO int primary key NOT NULL AUTO_INCREMENT," +
-                    " ID_RONDA int  NOT NULL," +
-                    " EQUIPO1 Varchar(255) NOT NULL," +
-                    " GOLES_EQ1 int NOT NULL," +
-                    " GOLES_EQ2 int NOT NULL," +
-                    " EQUIPO2 Varchar(255) NOT NULL" +
-                    ");");
-
-            con.close();
-        }catch(Exception e){
-            throw e;
+            credencialesBaseDeDatos[PRIMER_INDEX] = propiedades.getProperty("DBurl");
+            credencialesBaseDeDatos[SEGUNDO_INDEX] = propiedades.getProperty("DBuser");
+            credencialesBaseDeDatos[TERCER_INDEX] = propiedades.getProperty("DBpassword");
+        } catch (FileNotFoundException e) {
+            throw new FileNotFoundException();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
+
+        return credencialesBaseDeDatos;
     }
 
     //Post: Lee desde la base de dato la tabla de partidos y carga lo leido en la competencia.
-    public void cargarPartidos(Competencia competencia) throws SQLException {
+    public void cargarPartidos(Competencia competencia) throws SQLException, FileNotFoundException {
         Partido partidoLeido;
+        String[] credencialesBaseDeDatos = recuperarCredencialesBaseDeDatos();
 
         try{
-            Connection con = DriverManager.getConnection(urlDB, USUARIO, CONTRASENIA);
+            Connection con = DriverManager.getConnection(credencialesBaseDeDatos[PRIMER_INDEX], credencialesBaseDeDatos[SEGUNDO_INDEX], credencialesBaseDeDatos[TERCER_INDEX]);
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM Partidos");
 
@@ -69,17 +63,18 @@ public class DatabaseConnector {
 
             con.close();
         } catch(Exception e){
-            throw e;
+            throw new SQLException(e);
         }
     }
 
     //Post: Lee desde la base de datos la tabla de pronosticos y carga lo leido en la competencia.
-    public void cargarPronosticos(Competencia competencia) throws SQLException {
+    public void cargarPronosticos(Competencia competencia) throws SQLException, FileNotFoundException {
         Pronostico pronosticoLeido;
         int pronosticoPartido;
+        String[] credencialesBaseDeDatos = recuperarCredencialesBaseDeDatos();
 
         try {
-            Connection con = DriverManager.getConnection(urlDB, USUARIO, CONTRASENIA);
+            Connection con = DriverManager.getConnection(credencialesBaseDeDatos[PRIMER_INDEX], credencialesBaseDeDatos[SEGUNDO_INDEX], credencialesBaseDeDatos[TERCER_INDEX]);
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM Pronosticos");
 
@@ -94,7 +89,7 @@ public class DatabaseConnector {
 
             con.close();
         } catch (Exception e) {
-            throw e;
+            throw new SQLException(e);
         }
     }
 

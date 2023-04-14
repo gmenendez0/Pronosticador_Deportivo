@@ -1,0 +1,3 @@
+DBurl=jdbc:dummy://dummy10.DUMMY_URL.net:3306/sql10642344
+DBuser=dummyUser
+DBpassword=dummyPassword123
