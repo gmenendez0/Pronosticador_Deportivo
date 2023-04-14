@@ -7,7 +7,6 @@ public class Competencia {
 
 
     private ArrayList<Ronda> rondas = new ArrayList<Ronda>();
-    private ArrayList<Equipo> equipos = new ArrayList<Equipo>();
     private ArrayList<Pronosticador> pronosticadores = new ArrayList<Pronosticador>();
     private final int puntos_por_acierto;
 
@@ -19,11 +18,6 @@ public class Competencia {
     //Post: Agrega una ronda a la competencia
     public void agregar_ronda(Ronda ronda) {
         rondas.add(ronda);
-    }
-
-    //Post: Agrega un equipo a la competencia
-    public void agregar_equipo(Equipo equipo) {
-        equipos.add(equipo);
     }
 
     //Post: Agrega un pronosticador a la competencia
@@ -47,24 +41,6 @@ public class Competencia {
         }
 
         return ronda_buscada;
-    }
-
-    //Post: Devuelve el equipo buscado o null en caso de no encontrarlo
-    private Equipo obtener_equipo(String nombre_equipo_buscado) {
-        Equipo equipo_buscado = null;
-        int iterador = 0;
-        boolean encontrado = false;
-
-        while (iterador < equipos.size() && !encontrado) {
-            if (equipos.get(iterador).get_id_equipo().equals(nombre_equipo_buscado)) {
-                equipo_buscado = equipos.get(iterador);
-                encontrado = true;
-            }
-
-            iterador++;
-        }
-
-        return equipo_buscado;
     }
 
     //Post: Devuelve el pronosticador buscado o null en caso de no encontrarlo
