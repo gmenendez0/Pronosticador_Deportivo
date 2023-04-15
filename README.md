@@ -3,7 +3,7 @@
 Pronosticador deportivo es un programa que lee partidos y pronosticos de una base de datos y puntua a cada participante dependiendo de sus aciertos.
 
 ## Diagrama de clases
-<img src="https://github.com/gmenendez0/Pronosticador_Deportivo/blob/main/doc/UML_Pronosticador_Deportivo.drawio.png" alt="class_diagram">
+<img src="https://github.com/gmenendez0/Pronosticador_Deportivo/blob/main/doc/UML_Pronosticador_Deportivo.png" alt="class_diagram">
 
 ## Database DER
 <img src="https://github.com/gmenendez0/Pronosticador_Deportivo/blob/main/doc/Database%20DER.png" alt="Database DER">
