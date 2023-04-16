@@ -1,4 +1,4 @@
-package database;
+package org.database;
 import org.pronosticador.Competencia;
 import org.pronosticador.Partido;
 import org.pronosticador.Pronostico;
