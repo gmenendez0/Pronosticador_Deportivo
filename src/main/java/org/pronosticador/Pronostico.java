@@ -6,7 +6,7 @@ public class Pronostico {
     private final int pronostico; //0: empate, 1: equipo1, 2: equipo2
 
     //Post: Crea un pronostico con los datos recibidos
-    Pronostico(int ID_partido, int ID_ronda, int pronostico){
+    public Pronostico(int ID_partido, int ID_ronda, int pronostico){
         this.ID_partido = ID_partido;
         this.ID_ronda = ID_ronda;
         this.pronostico = pronostico;

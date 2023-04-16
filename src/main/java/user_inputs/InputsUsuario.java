@@ -1,4 +1,4 @@
-package org.pronosticador;
+package user_inputs;
 
 import java.util.Scanner;
 

@@ -66,6 +66,21 @@ public class Competencia {
         return ((partido_pronosticado != null) && (pronostico_actual.get_pronostico() == partido_pronosticado.get_resultado_partido()));
     }
 
+    private void aumentar_puntos(Pronostico pronostico, Pronosticador pronosticador){
+        pronosticador.set_puntaje(pronosticador.get_puntaje() + puntos_por_acierto);
+        pronosticador.aumentar_aciertos();
+        pronosticador.aumentar_aciertos_de_ronda(pronostico.get_id_ronda());
+    }
+
+    private void evaluar_pronosticos_pronosticador(Pronosticador pronosticador){
+        for (int j = 0; j < pronosticador.obtener_pronosticos().size(); j++) {
+            Pronostico pronostico_actual = pronosticador.obtener_pronosticos().get(j);
+            Partido partido_pronosticado = this.obtener_ronda(pronostico_actual.get_id_ronda()).obtener_partido(pronostico_actual.get_id_partido());
+
+            if(pronostico_acertado(partido_pronosticado, pronostico_actual)) aumentar_puntos(pronostico_actual, pronosticador);
+        }
+    }
+
     //Post: Actualiza la cantidad de puntos de cada pronosticador por pronosticos acertados.
     private void calcular_puntos_por_aciertos() {
         Pronosticador pronosticador_actual;
@@ -74,16 +89,7 @@ public class Competencia {
             pronosticador_actual = pronosticadores.get(i);
             pronosticador_actual.inicializar_aciertos_por_ronda(rondas);
 
-            for (int j = 0; j < pronosticador_actual.obtener_pronosticos().size(); j++) {
-                Pronostico pronostico_actual = pronosticador_actual.obtener_pronosticos().get(j);
-                Partido partido_pronosticado = this.obtener_ronda(pronostico_actual.get_id_ronda()).obtener_partido(pronostico_actual.get_id_partido());
-
-                if(pronostico_acertado(partido_pronosticado, pronostico_actual)){
-                    pronosticadores.get(i).set_puntaje(pronosticador_actual.get_puntaje() + puntos_por_acierto);
-                    pronosticadores.get(i).aumentar_aciertos();
-                    pronosticadores.get(i).aumentar_aciertos_de_ronda(pronostico_actual.get_id_ronda());
-                }
-            }
+            evaluar_pronosticos_pronosticador(pronosticador_actual);
         }
     }
 

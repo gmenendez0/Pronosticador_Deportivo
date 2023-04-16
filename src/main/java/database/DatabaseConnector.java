@@ -1,4 +1,8 @@
-package org.pronosticador;
+package database;
+import org.pronosticador.Competencia;
+import org.pronosticador.Partido;
+import org.pronosticador.Pronostico;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;

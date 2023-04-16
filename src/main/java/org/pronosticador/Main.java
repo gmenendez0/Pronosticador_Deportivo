@@ -1,4 +1,6 @@
 package org.pronosticador;
+import database.DatabaseConnector;
+import user_inputs.InputsUsuario;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 
