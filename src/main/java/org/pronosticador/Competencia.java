@@ -65,6 +65,7 @@ public class Competencia {
         return ((partido_pronosticado != null) && (pronostico_actual.get_pronostico() == partido_pronosticado.get_resultado_partido()));
     }
 
+    //Post: Aumenta los puntos del pronosticador, junto con su cantidad de aciertos y los aciertos de la ronda correspondiente al pronostico recibido.
     private void aumentar_puntos(Pronostico pronostico, Pronosticador pronosticador){
         pronosticador.set_puntaje(pronosticador.get_puntaje() + puntos_por_acierto);
         pronosticador.aumentar_aciertos();
