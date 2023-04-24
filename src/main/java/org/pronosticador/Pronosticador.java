@@ -8,10 +8,10 @@ public class Pronosticador {
     final int ERROR = -1;
 
     private final String nombre;
-    private ArrayList<Pronostico> pronosticos = new ArrayList<Pronostico>();
+    private final ArrayList<Pronostico> pronosticos = new ArrayList<>();
     private int puntaje;
     private int cantidad_de_aciertos;
-    private ArrayList<AciertoRonda> aciertos_por_ronda = new ArrayList<AciertoRonda>();
+    private final ArrayList<AciertoRonda> aciertos_por_ronda = new ArrayList<>();
 
     //Post: Crea un pronosticador con los datos recibidos
     public Pronosticador(String nombre) {

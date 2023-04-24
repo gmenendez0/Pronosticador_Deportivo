@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Ronda {
     private final int ID_ronda;
-    private ArrayList<Partido> partidos = new ArrayList<Partido>();
+    private final ArrayList<Partido> partidos = new ArrayList<>();
 
     //Post: Crea una ronda con el id recibido
     public Ronda(int ID_ronda) {

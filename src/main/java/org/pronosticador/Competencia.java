@@ -5,9 +5,8 @@ import java.util.ArrayList;
 public class Competencia {
     final int PUNTOS_POR_RONDA_ACERTADA = 5;
 
-
-    private ArrayList<Ronda> rondas = new ArrayList<Ronda>();
-    private ArrayList<Pronosticador> pronosticadores = new ArrayList<Pronosticador>();
+    private final ArrayList<Ronda> rondas = new ArrayList<>();
+    private final ArrayList<Pronosticador> pronosticadores = new ArrayList<>();
     private final int puntos_por_acierto;
 
     //Post: Crea una competencia
@@ -72,6 +71,7 @@ public class Competencia {
         pronosticador.aumentar_aciertos_de_ronda(pronostico.get_id_ronda());
     }
 
+    //Post: Evalua si los pronosticos del pronosticador son acertados, en caso de serlos, aumenta sus puntos
     private void evaluar_pronosticos_pronosticador(Pronosticador pronosticador){
         for (int j = 0; j < pronosticador.obtener_pronosticos().size(); j++) {
             Pronostico pronostico_actual = pronosticador.obtener_pronosticos().get(j);
