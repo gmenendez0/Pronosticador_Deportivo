@@ -5,32 +5,32 @@ public class Partido {
     final int GANA_EQUIPO1 = 1;
     final int GANA_EQUIPO2 = 2;
 
-    private final int ID_Partido;
-    private final int ID_ronda;
-    private final String ID_equipo1;
-    private final String ID_equipo2;
-    private final int goles_equipo1;
-    private final int goles_equipo2;
+    private final int idPartido;
+    private final int idRonda;
+    private final String idEquipo1;
+    private final String idEquipo2;
+    private final int golesEquipo1;
+    private final int golesEquipo2;
     private int resultado; //0: empate, 1: equipo1, 2: equipo2
 
     //Post: Crea un partido con los datos recibidos.
-    public Partido(int ID_Partido, int ID_ronda, String ID_equipo1, String ID_equipo2, int goles_equipo1, int goles_equipo2) {
-        this.ID_Partido = ID_Partido;
-        this.ID_ronda = ID_ronda;
-        this.ID_equipo1 = ID_equipo1;
-        this.ID_equipo2 = ID_equipo2;
-        this.goles_equipo1 = goles_equipo1;
-        this.goles_equipo2 = goles_equipo2;
+    public Partido(int idPartido, int idRonda, String idEquipo1, String idEquipo2, int golesEquipo1, int golesEquipo2) {
+        this.idPartido = idPartido;
+        this.idRonda = idRonda;
+        this.idEquipo1 = idEquipo1;
+        this.idEquipo2 = idEquipo2;
+        this.golesEquipo1 = golesEquipo1;
+        this.golesEquipo2 = golesEquipo2;
 
-        this.calcular_resultado_partido(goles_equipo1, goles_equipo2);
+        this.calcularResultadoPartido(golesEquipo1, golesEquipo2);
     }
 
     //Pre: Debe recibir los goles de cada equipo
     //Post: Calcula el resultado del partido y lo guarda en la variable resultado
-    private void calcular_resultado_partido(int goles_equipo1, int goles_equipo2) {
-        if(goles_equipo1 < goles_equipo2) {
+    private void calcularResultadoPartido(int golesEquipo1, int golesEquipo2) {
+        if(golesEquipo1 < golesEquipo2) {
             this.resultado = GANA_EQUIPO2;
-        } else if(goles_equipo1 > goles_equipo2) {
+        } else if(golesEquipo1 > golesEquipo2) {
             this.resultado = GANA_EQUIPO1;
         } else {
             this.resultado = EMPATE;
@@ -38,17 +38,17 @@ public class Partido {
     }
 
     //Post: Devuelve el ID del partido
-    public int get_id_partido() {
-        return this.ID_Partido;
+    public int getIdPartido() {
+        return this.idPartido;
     }
 
     //Post: Devuelve el ID de la ronda a la que pertenece el partido
-    public int get_id_ronda() {
-        return this.ID_ronda;
+    public int getIdRonda() {
+        return this.idRonda;
     }
 
     //Post: Devuelve el resultado del partido
-    public int get_resultado_partido() {
+    public int getResultadoPartido() {
         return this.resultado;
     }
 }

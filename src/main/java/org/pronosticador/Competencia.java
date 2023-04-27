@@ -7,135 +7,135 @@ public class Competencia {
 
     private final ArrayList<Ronda> rondas = new ArrayList<>();
     private final ArrayList<Pronosticador> pronosticadores = new ArrayList<>();
-    private final int puntos_por_acierto;
+    private final int puntosPorAcierto;
 
     //Post: Crea una competencia
-    public Competencia(int puntos_por_acierto) {
-        this.puntos_por_acierto = puntos_por_acierto;
+    public Competencia(int puntosPorAcierto) {
+        this.puntosPorAcierto = puntosPorAcierto;
     }
 
     //Post: Agrega una ronda a la competencia
-    public void agregar_ronda(Ronda ronda) {
+    public void agregarRonda(Ronda ronda) {
         rondas.add(ronda);
     }
 
     //Post: Agrega un pronosticador a la competencia
-    public void agregar_pronosticador(Pronosticador pronosticador) {
+    public void agregarPronosticador(Pronosticador pronosticador) {
         pronosticadores.add(pronosticador);
     }
 
     //Post: Devuelve la ronda buscada o null en caso de no encontrarla
-    private Ronda obtener_ronda(int numero_ronda) {
-        Ronda ronda_buscada = null;
+    private Ronda obtenerRonda(int numeroRonda) {
+        Ronda rondaBuscada = null;
         int iterador = 0;
         boolean encontrado = false;
 
         while (iterador < rondas.size() && !encontrado) {
-            if (rondas.get(iterador).get_id_ronda() == numero_ronda) {
-                ronda_buscada = rondas.get(iterador);
+            if (rondas.get(iterador).getIdRonda() == numeroRonda) {
+                rondaBuscada = rondas.get(iterador);
                 encontrado = true;
             }
 
             iterador++;
         }
 
-        return ronda_buscada;
+        return rondaBuscada;
     }
 
     //Post: Devuelve el pronosticador buscado o null en caso de no encontrarlo
-    private Pronosticador obtener_pronosticador(String nombre_pronosticador_buscado) {
-        Pronosticador pronosticador_buscado = null;
+    private Pronosticador obtenerPronosticador(String nombrePronosticadorBuscado) {
+        Pronosticador pronosticadorBuscado = null;
         int iterador = 0;
         boolean encontrado = false;
 
         while (iterador < pronosticadores.size() && !encontrado) {
-            if (pronosticadores.get(iterador).get_nombre().equals(nombre_pronosticador_buscado)) {
-                pronosticador_buscado = pronosticadores.get(iterador);
+            if (pronosticadores.get(iterador).getNombre().equals(nombrePronosticadorBuscado)) {
+                pronosticadorBuscado = pronosticadores.get(iterador);
                 encontrado = true;
             }
 
             iterador++;
         }
 
-        return pronosticador_buscado;
+        return pronosticadorBuscado;
     }
 
     //Post: Devuelve true si el pronóstico coincide con el resultado del partido, false en caso contrario o en caso de que el partido pronosticado no exista.
-    private boolean pronostico_acertado(Partido partido_pronosticado, Pronostico pronostico_actual){
-        return ((partido_pronosticado != null) && (pronostico_actual.get_pronostico() == partido_pronosticado.get_resultado_partido()));
+    private boolean pronosticoAcertado(Partido partidoPronosticado, Pronostico pronosticoActual){
+        return ((partidoPronosticado != null) && (pronosticoActual.getPronostico() == partidoPronosticado.getResultadoPartido()));
     }
 
     //Post: Aumenta los puntos del pronosticador, junto con su cantidad de aciertos y los aciertos de la ronda correspondiente al pronostico recibido.
-    private void aumentar_puntos(Pronostico pronostico, Pronosticador pronosticador){
-        pronosticador.set_puntaje(pronosticador.get_puntaje() + puntos_por_acierto);
-        pronosticador.aumentar_aciertos();
-        pronosticador.aumentar_aciertos_de_ronda(pronostico.get_id_ronda());
+    private void aumentarPuntos(Pronostico pronostico, Pronosticador pronosticador){
+        pronosticador.setPuntaje(pronosticador.getPuntaje() + puntosPorAcierto);
+        pronosticador.aumentarAciertos();
+        pronosticador.aumentarAciertosDeRonda(pronostico.getIdRonda());
     }
 
     //Post: Evalua si los pronosticos del pronosticador son acertados, en caso de serlos, aumenta sus puntos
-    private void evaluar_pronosticos_pronosticador(Pronosticador pronosticador){
-        for (int j = 0; j < pronosticador.obtener_pronosticos().size(); j++) {
-            Pronostico pronostico_actual = pronosticador.obtener_pronosticos().get(j);
-            Partido partido_pronosticado = this.obtener_ronda(pronostico_actual.get_id_ronda()).obtener_partido(pronostico_actual.get_id_partido());
+    private void evaluarPronosticosPronosticador(Pronosticador pronosticador){
+        for (int j = 0; j < pronosticador.obtenerPronosticos().size(); j++) {
+            Pronostico pronosticoActual = pronosticador.obtenerPronosticos().get(j);
+            Partido partidoPronosticado = this.obtenerRonda(pronosticoActual.getIdRonda()).obtenerPartido(pronosticoActual.getIdPartido());
 
-            if(pronostico_acertado(partido_pronosticado, pronostico_actual)) aumentar_puntos(pronostico_actual, pronosticador);
+            if(pronosticoAcertado(partidoPronosticado, pronosticoActual)) aumentarPuntos(pronosticoActual, pronosticador);
         }
     }
 
     //Post: Actualiza la cantidad de puntos de cada pronosticador por pronosticos acertados.
-    private void calcular_puntos_por_aciertos() {
-        Pronosticador pronosticador_actual;
+    private void calcularPuntosPorAciertos() {
+        Pronosticador pronosticadorActual;
 
-        for (int i = 0; i < pronosticadores.size(); i++) {
-            pronosticador_actual = pronosticadores.get(i);
-            pronosticador_actual.inicializar_aciertos_por_ronda(rondas);
+        for (Pronosticador pronosticador : pronosticadores) {
+            pronosticadorActual = pronosticador;
+            pronosticadorActual.inicializarAciertosPorRonda(rondas);
 
-            evaluar_pronosticos_pronosticador(pronosticador_actual);
+            evaluarPronosticosPronosticador(pronosticadorActual);
         }
     }
 
     //Post: Actualiza la cantidad de puntos de cada pronosticador por rondas completas acertadas.
-    private void calcular_puntos_por_rondas() {
-        for (int i = 0; i < pronosticadores.size(); i++) {
-            for (int j = 0; j < rondas.size(); j++) {
-                if (pronosticadores.get(i).get_aciertos_de_ronda(rondas.get(j).get_id_ronda()) == rondas.get(j).get_cantidad_de_partidos()) {
-                    pronosticadores.get(i).set_puntaje(pronosticadores.get(i).get_puntaje() + PUNTOS_POR_RONDA_ACERTADA);
+    private void calcularPuntosPorRondas() {
+        for (Pronosticador pronosticador : pronosticadores) {
+            for (Ronda ronda : rondas) {
+                if (pronosticador.getAciertosDeRonda(ronda.getIdRonda()) == ronda.getCantidadDePartidos()) {
+                    pronosticador.setPuntaje(pronosticador.getPuntaje() + PUNTOS_POR_RONDA_ACERTADA);
                 }
             }
         }
     }
 
     //Post: Imprime en pantalla los puntajes de todos los pronosticadores
-    public void mostrar_puntajes() {
-        calcular_puntos_por_aciertos();
-        calcular_puntos_por_rondas();
+    public void mostrarPuntajes() {
+        calcularPuntosPorAciertos();
+        calcularPuntosPorRondas();
 
-        for (int i = 0; i < pronosticadores.size(); i++) {
-            System.out.println(pronosticadores.get(i).get_nombre() + ": Puntos: " + pronosticadores.get(i).get_puntaje() + " Aciertos: " + pronosticadores.get(i).get_cantidad_de_aciertos());
+        for (Pronosticador pronosticador : pronosticadores) {
+            System.out.println(pronosticador.getNombre() + ": Puntos: " + pronosticador.getPuntaje() + " Aciertos: " + pronosticador.getCantidadDeAciertos());
         }
     }
 
     //Post: Agregará el partido a la ronda correspondiente, si no existe la ronda, la crea
-    public void agregar_partido(Partido partido){
-        int id_ronda = partido.get_id_ronda();
+    public void agregarPartido(Partido partido){
+        int idRonda = partido.getIdRonda();
 
-        if(obtener_ronda(id_ronda) == null){
-            Ronda nueva_ronda = new Ronda(id_ronda);
-            nueva_ronda.agregar_partido(partido);
-            agregar_ronda(nueva_ronda);
+        if(obtenerRonda(idRonda) == null){
+            Ronda nuevaRonda = new Ronda(idRonda);
+            nuevaRonda.agregarPartido(partido);
+            agregarRonda(nuevaRonda);
         } else {
-            obtener_ronda(id_ronda).agregar_partido(partido);
+            obtenerRonda(idRonda).agregarPartido(partido);
         }
     }
 
     //Post: Agregará el pronóstico al pronosticador correspondiente, si no existe el pronosticador, lo crea
-    public void agregar_pronostico(Pronostico pronostico, String nombre_pronosticador){
-        if(obtener_pronosticador(nombre_pronosticador) == null){
-            Pronosticador nuevo_pronosticador = new Pronosticador(nombre_pronosticador);
-            nuevo_pronosticador.agregar_pronostico(pronostico);
-            agregar_pronosticador(nuevo_pronosticador);
+    public void agregarPronostico(Pronostico pronostico, String nombrePronosticador){
+        if(obtenerPronosticador(nombrePronosticador) == null){
+            Pronosticador nuevoPronosticador = new Pronosticador(nombrePronosticador);
+            nuevoPronosticador.agregarPronostico(pronostico);
+            agregarPronosticador(nuevoPronosticador);
         } else {
-            obtener_pronosticador(nombre_pronosticador).agregar_pronostico(pronostico);
+            obtenerPronosticador(nombrePronosticador).agregarPronostico(pronostico);
         }
     }
 }

@@ -6,13 +6,13 @@ import java.sql.SQLException;
 
 public class Main {
     public static void main(String[] args) throws SQLException, FileNotFoundException {
-        var inputs_usuario = new InputsUsuario();
-        Competencia competencia = new Competencia(inputs_usuario.preguntar_puntos_por_acierto());
+        var inputsUsuario = new InputsUsuario();
+        Competencia competencia = new Competencia(inputsUsuario.preguntarPuntosPorAcierto());
         DatabaseConnector databaseConnector = new DatabaseConnector();
 
         databaseConnector.cargarPartidos(competencia);
         databaseConnector.cargarPronosticos(competencia);
 
-        competencia.mostrar_puntajes();
+        competencia.mostrarPuntajes();
     }
 }

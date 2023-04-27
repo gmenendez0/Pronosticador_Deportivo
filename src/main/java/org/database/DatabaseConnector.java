@@ -58,11 +58,11 @@ public class DatabaseConnector {
         try{
             Connection con = DriverManager.getConnection(credencialesBaseDeDatos[PRIMER_INDEX], credencialesBaseDeDatos[SEGUNDO_INDEX], credencialesBaseDeDatos[TERCER_INDEX]);
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Partidos");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM partidos");
 
             while(rs.next()) {
                 partidoLeido = new Partido(rs.getInt(PRIMERA_POSICION), rs.getInt(SEGUNDA_POSICION), rs.getString(TERCERA_POSICION), rs.getString(SEXTA_POSICION), rs.getInt(CUARTA_POSICION), rs.getInt(QUINTA_POSICION));
-                competencia.agregar_partido(partidoLeido);
+                competencia.agregarPartido(partidoLeido);
             }
 
             con.close();
@@ -80,7 +80,7 @@ public class DatabaseConnector {
         try {
             Connection con = DriverManager.getConnection(credencialesBaseDeDatos[PRIMER_INDEX], credencialesBaseDeDatos[SEGUNDO_INDEX], credencialesBaseDeDatos[TERCER_INDEX]);
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Pronosticos");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM pronosticos");
 
             while (rs.next()) {
                 String[] caracteristicasPronostico = {rs.getString(SEXTA_POSICION), rs.getString(OCTAVA_POSICION)};
@@ -88,7 +88,7 @@ public class DatabaseConnector {
                 pronosticoPartido = determinarPronosticoRealizado(caracteristicasPronostico);
                 pronosticoLeido = new Pronostico(rs.getInt(TERCERA_POSICION), rs.getInt(CUARTA_POSICION), pronosticoPartido);
 
-                competencia.agregar_pronostico(pronosticoLeido, rs.getString(SEGUNDA_POSICION));
+                competencia.agregarPronostico(pronosticoLeido, rs.getString(SEGUNDA_POSICION));
             }
 
             con.close();

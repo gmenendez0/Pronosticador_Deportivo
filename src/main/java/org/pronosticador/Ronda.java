@@ -3,44 +3,44 @@ package org.pronosticador;
 import java.util.ArrayList;
 
 public class Ronda {
-    private final int ID_ronda;
+    private final int idRonda;
     private final ArrayList<Partido> partidos = new ArrayList<>();
 
     //Post: Crea una ronda con el id recibido
-    public Ronda(int ID_ronda) {
-        this.ID_ronda = ID_ronda;
+    public Ronda(int idRonda) {
+        this.idRonda = idRonda;
     }
 
     //Post: Agrega el partido recibido al array de partidos
-    public void agregar_partido(Partido partido) {
+    public void agregarPartido(Partido partido) {
         partidos.add(partido);
     }
 
     //Pre: Debe recibir un id_partido mayor a 0.
     //Post: Devuelve el partido con el id recibido o null en caso de no encontrarlo.
-    public Partido obtener_partido(int id_partido) {
+    public Partido obtenerPartido(int idPartido) {
         boolean encontrado = false;
-        Partido partido_buscado = null;
+        Partido partidoBuscado = null;
         int iterador = 0;
 
         while (!encontrado && iterador < partidos.size()) {
-            if (partidos.get(iterador).get_id_partido() == id_partido) {
+            if (partidos.get(iterador).getIdPartido() == idPartido) {
                 encontrado = true;
-                partido_buscado = partidos.get(iterador);
+                partidoBuscado = partidos.get(iterador);
             }
             iterador++;
         }
 
-        return partido_buscado;
+        return partidoBuscado;
     }
 
     //Post: Devuelve el id de la ronda
-    public int get_id_ronda() {
-        return ID_ronda;
+    public int getIdRonda() {
+        return idRonda;
     }
 
     //Post: Devuelve la cantidad de partidos que tiene la ronda
-    public int get_cantidad_de_partidos() {
+    public int getCantidadDePartidos() {
         return partidos.size();
     }
 }
