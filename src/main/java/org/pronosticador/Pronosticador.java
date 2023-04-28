@@ -64,13 +64,11 @@ public class Pronosticador {
         }
     }
 
-    //Pre: Debe recibir un número de ronda de id mayor a 0 y que este registrado en el sistema de rondas del sistema.
+    //Pre: Debe recibir un idRonda de id mayor a 0 y que este registrado en el sistema de rondas del sistema.
     //Post: Aumenta en 1 la cantidad de aciertos de la ronda recibida.
-    public void aumentarAciertosDeRonda(int numeroDeRonda){
+    public void aumentarAciertosDeRonda(int idRonda){
         for (AciertoRonda aciertoRonda : aciertosPorRonda) {
-            if (aciertoRonda.getIdRonda() == numeroDeRonda) {
-                aciertoRonda.aumentarAciertos();
-            }
+            if (aciertoRonda.getIdRonda() == idRonda) aciertoRonda.aumentarAciertos();
         }
     }
 
@@ -80,9 +78,7 @@ public class Pronosticador {
         int cantidadDeAciertos = ERROR;
 
         for (AciertoRonda aciertoRonda : aciertosPorRonda) {
-            if (aciertoRonda.getIdRonda() == numeroDeRonda) {
-                cantidadDeAciertos = aciertoRonda.getAciertos();
-            }
+            if (aciertoRonda.getIdRonda() == numeroDeRonda) cantidadDeAciertos = aciertoRonda.getAciertos();
         }
 
         return cantidadDeAciertos;

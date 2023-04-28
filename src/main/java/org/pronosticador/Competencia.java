@@ -128,6 +128,7 @@ public class Competencia {
         }
     }
 
+    //Pre: No puede haber dos pronosticadores con el mismo nombre. Debe haber algo para diferenciarlos en dicho nombre.
     //Post: Agregará el pronóstico al pronosticador correspondiente, si no existe el pronosticador, lo crea
     public void agregarPronostico(Pronostico pronostico, String nombrePronosticador){
         if(obtenerPronosticador(nombrePronosticador) == null){
