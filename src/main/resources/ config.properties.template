@@ -1,3 +1,3 @@
-DBurl=jdbc:dummy://dummy10.DUMMY_URL.net:3306/sql10642344
+DBurl=jdbc:DB://SERVER_NAME.net:PORT_NUMBER/DATABASE_NAME
 DBuser=dummyUser
 DBpassword=dummyPassword123
