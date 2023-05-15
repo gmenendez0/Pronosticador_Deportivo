@@ -1,6 +1,7 @@
 package org.pronosticador;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Pronosticador {
     final int PUNTAJE_INICIAL = 0;
@@ -8,10 +9,10 @@ public class Pronosticador {
     final int ERROR = -1;
 
     private final String nombre;
-    private final ArrayList<Pronostico> pronosticos = new ArrayList<>();
+    private final List<Pronostico> pronosticos = new ArrayList<>();
     private int puntaje;
     private int cantidadDeAciertos;
-    private final ArrayList<AciertoRonda> aciertosPorRonda = new ArrayList<>();
+    private final List<AciertoRonda> aciertosPorRonda = new ArrayList<>();
 
     //Post: Crea un pronosticador con los datos recibidos
     public Pronosticador(String nombre) {
@@ -26,7 +27,7 @@ public class Pronosticador {
     }
 
     //Post: Devuelve el array con todos los pronosticos del pronosticador
-    public ArrayList<Pronostico> obtenerPronosticos(){
+    public List<Pronostico> obtenerPronosticos(){
         return pronosticos;
     }
 
@@ -57,7 +58,7 @@ public class Pronosticador {
 
     //Pre: No puede haber rondas de id <= 0.
     //Post: Inicializará en el vector de aciertos_por_ronda, las rondas que esten hayan sido cargadas al sistema.
-    public void inicializarAciertosPorRonda(ArrayList<Ronda> rondas) {
+    public void inicializarAciertosPorRonda(List<Ronda> rondas) {
         for (Ronda ronda : rondas) {
             var contadorAciertoRonda = new AciertoRonda(ronda.getIdRonda());
             aciertosPorRonda.add(contadorAciertoRonda);

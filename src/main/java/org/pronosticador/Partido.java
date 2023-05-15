@@ -7,20 +7,12 @@ public class Partido {
 
     private final int idPartido;
     private final int idRonda;
-    private final String idEquipo1;
-    private final String idEquipo2;
-    private final int golesEquipo1;
-    private final int golesEquipo2;
     private int resultado; //0: empate, 1: equipo1, 2: equipo2
 
     //Post: Crea un partido con los datos recibidos.
-    public Partido(int idPartido, int idRonda, String idEquipo1, String idEquipo2, int golesEquipo1, int golesEquipo2) {
+    public Partido(int idPartido, int idRonda, int golesEquipo1, int golesEquipo2) {
         this.idPartido = idPartido;
         this.idRonda = idRonda;
-        this.idEquipo1 = idEquipo1;
-        this.idEquipo2 = idEquipo2;
-        this.golesEquipo1 = golesEquipo1;
-        this.golesEquipo2 = golesEquipo2;
 
         this.calcularResultadoPartido(golesEquipo1, golesEquipo2);
     }

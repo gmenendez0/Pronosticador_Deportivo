@@ -1,12 +1,13 @@
 package org.pronosticador;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Competencia {
     final int PUNTOS_POR_RONDA_ACERTADA = 5;
 
-    private final ArrayList<Ronda> rondas = new ArrayList<>();
-    private final ArrayList<Pronosticador> pronosticadores = new ArrayList<>();
+    private final List<Ronda> rondas = new ArrayList<>();
+    private final List<Pronosticador> pronosticadores = new ArrayList<>();
     private final int puntosPorAcierto;
 
     //Post: Crea una competencia
@@ -62,21 +63,21 @@ public class Competencia {
 
     //Post: Devuelve true si el pronóstico coincide con el resultado del partido, false en caso contrario o en caso de que el partido pronosticado no exista.
     private boolean pronosticoAcertado(Partido partidoPronosticado, Pronostico pronosticoActual){
-        return ((partidoPronosticado != null) && (pronosticoActual.getPronostico() == partidoPronosticado.getResultadoPartido()));
+        return ((partidoPronosticado != null) && (pronosticoActual.pronostico() == partidoPronosticado.getResultadoPartido()));
     }
 
     //Post: Aumenta los puntos del pronosticador, junto con su cantidad de aciertos y los aciertos de la ronda correspondiente al pronostico recibido.
     private void aumentarPuntos(Pronostico pronostico, Pronosticador pronosticador){
         pronosticador.setPuntaje(pronosticador.getPuntaje() + puntosPorAcierto);
         pronosticador.aumentarAciertos();
-        pronosticador.aumentarAciertosDeRonda(pronostico.getIdRonda());
+        pronosticador.aumentarAciertosDeRonda(pronostico.idRonda());
     }
 
     //Post: Evalua si los pronosticos del pronosticador son acertados, en caso de serlos, aumenta sus puntos
     private void evaluarPronosticosPronosticador(Pronosticador pronosticador){
         for (int j = 0; j < pronosticador.obtenerPronosticos().size(); j++) {
             Pronostico pronosticoActual = pronosticador.obtenerPronosticos().get(j);
-            Partido partidoPronosticado = this.obtenerRonda(pronosticoActual.getIdRonda()).obtenerPartido(pronosticoActual.getIdPartido());
+            Partido partidoPronosticado = this.obtenerRonda(pronosticoActual.idRonda()).obtenerPartido(pronosticoActual.idPartido());
 
             if(pronosticoAcertado(partidoPronosticado, pronosticoActual)) aumentarPuntos(pronosticoActual, pronosticador);
         }

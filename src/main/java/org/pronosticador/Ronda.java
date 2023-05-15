@@ -1,10 +1,11 @@
 package org.pronosticador;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Ronda {
     private final int idRonda;
-    private final ArrayList<Partido> partidos = new ArrayList<>();
+    private final List<Partido> partidos = new ArrayList<>();
 
     //Post: Crea una ronda con el id recibido
     public Ronda(int idRonda) {
