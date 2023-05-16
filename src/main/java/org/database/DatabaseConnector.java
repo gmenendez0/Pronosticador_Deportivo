@@ -61,7 +61,7 @@ public class DatabaseConnector {
             ResultSet rs = stmt.executeQuery("SELECT * FROM partidos");
 
             while(rs.next()) {
-                partidoLeido = new Partido(rs.getInt(PRIMERA_POSICION), rs.getInt(SEGUNDA_POSICION), rs.getString(TERCERA_POSICION), rs.getString(SEXTA_POSICION), rs.getInt(CUARTA_POSICION), rs.getInt(QUINTA_POSICION));
+                partidoLeido = new Partido(rs.getInt(PRIMERA_POSICION), rs.getInt(SEGUNDA_POSICION), rs.getInt(CUARTA_POSICION), rs.getInt(QUINTA_POSICION));
                 competencia.agregarPartido(partidoLeido);
             }
 
